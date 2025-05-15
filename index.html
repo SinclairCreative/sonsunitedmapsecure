@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Sons United Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.js"></script>
+  <script src="https://unpkg.com/supercluster@7.1.4/dist/supercluster.min.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://apis.google.com https://accounts.google.com https://www.gstatic.com 'unsafe-inline' 'unsafe-eval'; worker-src blob:; connect-src https://*.mapbox.com https://*.googleapis.com https://accounts.google.com http://localhost:8000 'self';">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="mobile-title" style="display:none;">Member Directory</div>
+  <div id="map"></div>
+  <div class="mapboxgl-ctrl-custom-group" id="custom-map-controls">
+    <button class="mapboxgl-ctrl-custom-btn" id="zoom-in" title="Zoom in">+</button>
+    <button class="mapboxgl-ctrl-custom-btn" id="zoom-out" title="Zoom out">−</button>
+    <button class="mapboxgl-ctrl-custom-btn" id="recenter" title="Recenter">⟳</button>
+  </div>
+  <div class="floating-panel">
+    <div class="directory-header">
+      <div class="title">Member Directory</div>
+      <div class="toolbar">
+        <input id="search" type="text" placeholder="Search name, email, phone, address..." aria-label="Search contacts" list="search-suggestions" autocomplete="off" />
+        <datalist id="search-suggestions"></datalist>
+        <button id="show-all" title="Show all members on map">All</button>
+        <button id="download" title="Download CSV">CSV</button>
+      </div>
+    </div>
+    <div id="info-box">
+      <div id="basic-info"><em>Loading contacts…</em></div>
+      <button id="toggle-details">Details</button>
+      <div id="extra-details"></div>
+    </div>
+    <div id="contact-list-module">
+      <div id="sort-container">
+        Sort by:
+        <select id="sort-select">
+          <option value="first">First Name</option>
+          <option value="last">Last Name</option>
+          <option value="state">State</option>
+          <option value="career">Career</option>
+        </select>
+      </div>
+      <ul id="contact-list"></ul>
+    </div>
+  </div>
+  <div id="spinner"><div class="spinner"></div></div>
+  <script src="script.js"></script>
+</body>
+</html>
