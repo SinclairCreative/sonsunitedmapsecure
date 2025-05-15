@@ -105,7 +105,7 @@ html, body {
       font-size: 1rem;
       min-height: 38px;
       max-height: 60px;
-      transition: min-height 0.2s, max-height 0.2s, padding 0.2s;
+      transition: min-height 0.2s, max-height 0.2s, padding 0.2s, overflow 0.2s;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -113,11 +113,12 @@ html, body {
       justify-content: center;
     }
     #info-box.expanded {
-      min-height: 110px;
-      max-height: 400px;
-      padding-top: 24px;    /* more space above name */
-      padding-bottom: 22px; /* more space below details */
+      min-height: 80px; /* Reduced from 110px */
+      max-height: 180px; /* Reduced from 400px */
+      padding-top: 12px;
+      padding-bottom: 10px;
       align-items: stretch;
+      overflow-y: auto; /* Allow scrolling when content exceeds max-height */
     }
     #info-box em {
       display: block;
@@ -175,7 +176,8 @@ html, body {
       flex: 1 1 auto;
       display: flex;
       flex-direction: column;
-      min-height: 0;
+      min-height: 0; /* Important for flex items to shrink properly */
+      overflow: hidden; /* Contain the overflow */
     }
     #sort-container {
       margin-bottom: 8px;
@@ -214,7 +216,7 @@ html, body {
       overflow-y: auto;
       font-size: 1rem;
       flex: 1 1 auto;
-      min-height: 0;
+      min-height: 0; /* Important for flex items to shrink properly */
     }
     #contact-list li {
       background: rgba(255,255,255,0.13);
@@ -422,6 +424,39 @@ html, body {
         margin: 6px 0;
       }
     }
+    /* Iframe-specific styles */
+@media (max-height: 650px) {
+  .floating-panel {
+    gap: 10px; /* Reduce gap between elements */
+  }
+  
+  .title {
+    font-size: 1.6rem;
+    margin: 0 0 5px 0;
+  }
+  
+  .toolbar {
+    margin-bottom: 0;
+  }
+  
+  .toolbar input, .toolbar button {
+    padding: 8px 10px;
+  }
+  
+  #info-box.expanded {
+    min-height: 60px;
+    max-height: 120px;
+  }
+  
+  #sort-container {
+    margin-bottom: 4px;
+  }
+  
+  #contact-list li {
+    padding: 6px 10px;
+    margin: 2px 0;
+  }
+}
     .auth-button {
       background: linear-gradient(90deg, #ED2F24 60%, #ff5e3a 100%);
       color: #fff;
