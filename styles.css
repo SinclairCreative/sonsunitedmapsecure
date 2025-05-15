@@ -267,13 +267,12 @@ html, body {
   background: rgba(255,255,255,0.06);
   border-radius: 10px;
   padding: 12px 10px 10px 10px;
-  margin-top: 0;
+  margin: 10px 10px 20px 10px;
   box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
-  flex: 1 1 auto;
+  max-height: 60vh;
+  overflow: visible; /* Changed from hidden */
   display: flex;
   flex-direction: column;
-  min-height: 0;
-  overflow: hidden;
 }
 
 #sort-container {
@@ -311,11 +310,12 @@ html, body {
   list-style: none;
   margin: 0;
   padding: 0;
-  max-height: 100%;
-  overflow-y: auto;
-  font-size: 1rem;
-  flex: 1 1 auto;
-  min-height: 0;
+  max-height: 50vh; /* Simplified height */
+  overflow-y: auto !important; /* Force scrolling with !important */
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px;
+  flex: 1;
+  min-height: 100px;
 }
 
 #contact-list li {
@@ -552,6 +552,31 @@ html, body {
     padding: 8px 16px;
     min-width: 50px;
   }
+  
+  #contact-list-module {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 12px 10px 10px 10px;
+    margin: 10px 10px 20px 10px;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
+    max-height: 60vh;
+    overflow: visible; /* Changed from hidden */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #contact-list {
+    height: 50vh; /* Add explicit height */
+    max-height: 50vh;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
+  }
+  
+  /* Add this to ensure scrolling works on iOS */
+  #contact-list li:last-child {
+    margin-bottom: 40px; /* Add space after last item to ensure scrollability */
+  }
 }
 
 /* Iframe-specific Styles */
@@ -682,5 +707,38 @@ html, body {
   .mapboxgl-ctrl-custom-group {
     right: 10px !important;
     top: 80px !important;
+  }
+  
+  #map {
+    height: 35vh !important;
+    min-height: 150px;
+  }
+  
+  #contact-list-module {
+    max-height: 45vh;
+    margin: 8px 8px 15px 8px;
+    padding: 10px 8px 8px 8px;
+    overflow: visible; /* Changed from hidden */
+  }
+  
+  #contact-list {
+    max-height: 40vh !important; /* Simplified and enforced */
+    overflow-y: auto !important;
+    padding-bottom: 15px;
+  }
+  
+  /* Add visible scrollbar styling for better UX */
+  #contact-list::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  #contact-list::-webkit-scrollbar-thumb {
+    background: rgba(237,47,36,0.5);
+    border-radius: 3px;
+  }
+  
+  #contact-list::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
   }
 }
