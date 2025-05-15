@@ -13,23 +13,21 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="mobile-title" style="display:none;">Member Directory</div>
   <div id="map"></div>
+  <div class="floating-search-container">
+    <div class="toolbar">
+      <input id="search" type="text" placeholder="Search name, email, phone, address..." aria-label="Search contacts" list="search-suggestions" autocomplete="off" />
+      <datalist id="search-suggestions"></datalist>
+      <button id="show-all" title="Show all members on map">All</button>
+      <button id="download" title="Download CSV">CSV</button>
+    </div>
+  </div>
   <div class="mapboxgl-ctrl-custom-group" id="custom-map-controls">
     <button class="mapboxgl-ctrl-custom-btn" id="zoom-in" title="Zoom in">+</button>
     <button class="mapboxgl-ctrl-custom-btn" id="zoom-out" title="Zoom out">−</button>
     <button class="mapboxgl-ctrl-custom-btn" id="recenter" title="Recenter">⟳</button>
   </div>
   <div class="floating-panel">
-    <div class="directory-header">
-      <div class="title">Member Directory</div>
-      <div class="toolbar">
-        <input id="search" type="text" placeholder="Search name, email, phone, address..." aria-label="Search contacts" list="search-suggestions" autocomplete="off" />
-        <datalist id="search-suggestions"></datalist>
-        <button id="show-all" title="Show all members on map">All</button>
-        <button id="download" title="Download CSV">CSV</button>
-      </div>
-    </div>
     <div id="info-box">
       <div id="basic-info"><em>Loading contacts…</em></div>
       <button id="toggle-details">Details</button>

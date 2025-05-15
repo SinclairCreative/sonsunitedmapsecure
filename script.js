@@ -505,7 +505,6 @@ mapboxgl.accessToken =
       const newMk=markers[`p_${i}`];
       if(newMk) newMk.getElement().src=icons.click;
       showInfo(i);
-      toggleBtn.classList.add('visible');
       document.getElementById('info-box').classList.add('expanded');
       reorderList(contacts);
     }
@@ -522,27 +521,52 @@ mapboxgl.accessToken =
       const cityStateZip = [r.city, r.state, r.zip].filter(Boolean).join(', ');
       
       basicInfo.innerHTML = `
-        <h3>${r.fullName}</h3>
-        <p>${cityStateZip}</p>
-        <p>${r.email}</p><p>${r.phone}</p>`;
+        <div class="name-row">
+          <h3>${r.fullName}</h3>
+          <button id="toggle-details" class="visible">Details</button>
+        </div>
+        <div class="contact-info">
+          <p>${cityStateZip}</p>
+          <p>${r.email}</p>
+          <p>${r.phone}</p>
+        </div>`;
+      
       extraDetails.innerHTML = `
-        <p><strong>Career/Work:</strong> ${r.career}</p>
-        <p><strong>Strengths/Interests:</strong> ${r.strengths}</p>
-        <p><strong>Notes:</strong> ${r.notes}</p>`;
+        <p><strong>Career/Work:</strong> ${r.career || 'Not specified'}</p>
+        <p><strong>Strengths/Interests:</strong> ${r.strengths || 'Not specified'}</p>
+        <p><strong>Notes:</strong> ${r.notes || 'None'}</p>`;
+      
       extraDetails.style.display = 'none';
-      toggleBtn.textContent = 'Details';
       document.getElementById('info-box').classList.add('expanded');
+      
+      // Reattach event listener to the newly created button
+      document.getElementById('toggle-details').onclick = function() {
+        if (extraDetails.style.display === 'none' || extraDetails.style.display === '') {
+          extraDetails.style.display = 'block';
+          this.textContent = 'Hide Details';
+        } else {
+          extraDetails.style.display = 'none';
+          this.textContent = 'Details';
+        }
+      };
     }
 
-    toggleBtn.onclick = function() {
-      if (extraDetails.style.display === 'none' || extraDetails.style.display === '') {
-        extraDetails.style.display = 'block';
-        toggleBtn.textContent = 'Hide Details';
-      } else {
-        extraDetails.style.display = 'none';
-        toggleBtn.textContent = 'Details';
+    // Modify the onContactClick function to use our new toggle function
+    function onContactClick(i) {
+      if(selectedIdx !== null) {
+        const oldMk = markers[`p_${selectedIdx}`];
+        if(oldMk) oldMk.getElement().src = icons.default;
       }
-    };
+      selectedIdx = i;
+      const newMk = markers[`p_${i}`];
+      if(newMk) newMk.getElement().src = icons.click;
+      showInfo(i);
+      document.getElementById('info-box').classList.add('expanded');
+      reorderList(contacts);
+    }
+
+    // Update the original toggleBtn.onclick to use our new function
+    toggleBtn.onclick = toggleExtraDetails;
 
     if (contacts.length === 0) {
       basicInfo.innerHTML = `<em>Loading contacts…</em>`;
